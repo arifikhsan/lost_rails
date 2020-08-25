@@ -9,7 +9,7 @@
       "type": "Ruby",
       "request": "launch",
       "program": "${workspaceRoot}/bin/rake",
-      "args": ["db:migrate", "test"],
+      "args": ["db:drop", "db:create", "db:migrate", "test"],
       "env": {"RAILS_ENV": "test"}
     },
     {
