@@ -1,24 +1,37 @@
-# README
+# Lost Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Todos
 
-Things you may want to cover:
+CRUD iklan
 
-* Ruby version
+## Commands
 
-* System dependencies
+### heroku clean
 
-* Configuration
+heroku restart && heroku pg:reset DATABASE --confirm lost-rails && heroku run rake db:migrate
 
-* Database creation
+### seed on heroku
 
-* Database initialization
+heroku restart --app=lost-rails && heroku pg:reset DATABASE --confirm lost-rails --app=lost-rails && heroku run rake db:migrate db:seed --app=lost-rails 
 
-* How to run the test suite
+### migrate and seed on heroku
 
-* Services (job queues, cache servers, search engines, etc.)
+heroku run rake db:migrate db:seed --app=lost-rails 
 
-* Deployment instructions
+heroku run console --app=lost-rails 
+heroku run bash --app=lost-rails 
 
-* ...
+### rebuild database locally
+
+rake db:drop db:create db:migrate
+rake db:drop db:create db:migrate db:seed
+rake db:seed
+
+### logs
+
+heroku logs --tail --app lost-rails
+
+### secret key
+
+EDITOR=vim rails credentials:edit
+rails:credentials:show
