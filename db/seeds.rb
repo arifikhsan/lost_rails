@@ -27,6 +27,7 @@ if Category.count.zero?
     { name: 'Tas' },
     { name: 'Dompet' },
     { name: 'Uang' },
+    { name: 'Perhiasan' },
   ]
   Category.create(main_categories)
 end
