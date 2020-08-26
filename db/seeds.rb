@@ -19,4 +19,16 @@ if User.count.zero?
   user.save
 end
 
+if Category.count.zero?
+  main_categories = [
+    { name: 'Elektronik' },
+    { name: 'Dompet' },
+    { name: 'Hewan Peliharaan' },
+    { name: 'Tas' },
+    { name: 'Dompet' },
+    { name: 'Uang' },
+  ]
+  Category.create(main_categories)
+end
+
 p 'seed done'
