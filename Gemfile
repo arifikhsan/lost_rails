@@ -54,3 +54,5 @@ gem "devise", "~> 4.7"
 gem "rails_admin", "~> 2.0"
 gem "rack-cors", "~> 1.1"
 gem "jwt", "~> 2.2"
+gem "graphql", "~> 1.11"
+gem 'graphiql-rails', group: :development
