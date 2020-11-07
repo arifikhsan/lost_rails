@@ -28,6 +28,7 @@ if Category.count.zero?
     { name: 'Dompet' },
     { name: 'Uang' },
     { name: 'Perhiasan' },
+    { name: 'Lainnya'}
   ]
   Category.create(main_categories)
 end
@@ -36,11 +37,17 @@ if Item.count.zero?
   40.times do
     Item.create(
       user: User.all.sample,
+      category: Category.all.sample,
       title: Faker::Lorem.sentence,
       detail: Faker::Lorem.paragraph,
       condition: Item.conditions.values.sample,
       latitude: Faker::Address.latitude,
-      longitude: Faker::Address.longitude
+      longitude: Faker::Address.longitude,
+      radius: [0, 10, 20, 30].sample,
+      time_start: Time.now,
+      time_end: Time.now + 1.year,
+      reward: [0, 100000, 500000, 800000].sample,
+      status: Item.statuses[:published]
     )
   end
 end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
     namespace :v1 do
       get 'me', to: 'users#me'
+      resources :items
     end
   end
 end
