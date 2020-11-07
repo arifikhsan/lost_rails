@@ -18,5 +18,25 @@ module LostRails
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+          headers: :any,
+          expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :post, :options, :delete, :put]
+      end
+    end
+
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins '*'
+    #     resource '*',
+    #       headers: :any,
+    #       methods: [:get, :patch, :post, :options, :delete, :head],
+    #       expose: ['access-token', 'token-type', 'client', 'expiry', 'uid']
+    #   end
+    # end
   end
 end

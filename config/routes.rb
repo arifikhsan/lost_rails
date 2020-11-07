@@ -12,7 +12,12 @@ Rails.application.routes.draw do
     post 'login', to: 'auth#login'
     delete 'logout', to: 'auth#logout'
     post 'register', to: 'auth#register'
-    get 'user', to: 'auth#user'
     get 'wakeup', to: 'misc#wakeup'
+    scope :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+    end
+    namespace :v1 do
+      get 'me', to: 'users#me'
+    end
   end
 end

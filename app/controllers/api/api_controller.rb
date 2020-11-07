@@ -1,5 +1,6 @@
 class Api::ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
+  include DeviseTokenAuth::Concerns::SetUserByToken
 
   def authorize_request
     return render_require_auth unless auth_header
