@@ -38,4 +38,16 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Item' do
+    navigation_label "Items"
+  end
+
+  config.model 'User' do
+    navigation_label "Users"
+  end
+
+  config.model 'UserDetail' do
+    navigation_label "Users"
+  end
 end

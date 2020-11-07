@@ -32,4 +32,17 @@ if Category.count.zero?
   Category.create(main_categories)
 end
 
+if Item.count.zero?
+  40.times do
+    Item.create(
+      user: User.all.sample,
+      title: Faker::Lorem.sentence,
+      detail: Faker::Lorem.paragraph,
+      condition: Item.conditions.values.sample,
+      latitude: Faker::Address.latitude,
+      longitude: Faker::Address.longitude
+    )
+  end
+end
+
 p 'seed done'

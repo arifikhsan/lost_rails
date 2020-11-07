@@ -58,3 +58,9 @@ gem "graphql", "~> 1.11"
 gem 'graphiql-rails', group: :development
 gem "graphql-rails_logger", "~> 1.2"
 gem "jt-rails-address", "~> 1.3"
+
+gem "geocoder", "~> 1.6"
+
+gem "rails_admin_rollincode", "~> 1.3"
+
+gem "faker", "~> 2.14"
