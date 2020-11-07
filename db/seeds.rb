@@ -25,7 +25,6 @@ if Category.count.zero?
     { name: 'Dompet' },
     { name: 'Hewan Peliharaan' },
     { name: 'Tas' },
-    { name: 'Dompet' },
     { name: 'Uang' },
     { name: 'Perhiasan' },
     { name: 'Lainnya'}
