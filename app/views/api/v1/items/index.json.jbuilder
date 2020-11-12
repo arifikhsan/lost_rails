@@ -24,8 +24,9 @@ json.data @items do |item|
     json.name item.user.name
     # json.email item.user.email
   end
-  json.category do
-    json.name item.category.name
+  json.categories item.categories do |category|
+    json.id category.id
+    json.name category.name
   end
 end
 json.pagination do

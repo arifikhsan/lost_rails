@@ -2,7 +2,8 @@ class Item < ApplicationRecord
   extend FriendlyId
 
   belongs_to :user
-  belongs_to :category
+  has_many :category_items, dependent: :destroy
+  has_many :categories, through: :category_items
 
   enum condition: [:lost, :found]
   enum status: [:draft, :review, :published, :moderate]

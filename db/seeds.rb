@@ -36,7 +36,6 @@ if Item.count.zero?
   40.times do
     Item.create(
       user: User.all.sample,
-      category: Category.all.sample,
       title: Faker::Lorem.sentence,
       detail: Faker::Lorem.paragraph,
       condition: Item.conditions.values.sample,
@@ -48,6 +47,10 @@ if Item.count.zero?
       reward: [0, 100000, 500000, 800000].sample,
       status: Item.statuses[:published]
     )
+  end
+
+  Item.all.each do |item|
+    item.category_items.create(category_id: Category.all.sample.id)
   end
 end
 
