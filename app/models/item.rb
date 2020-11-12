@@ -9,12 +9,9 @@ class Item < ApplicationRecord
 
   after_initialize :set_default_status, if: :new_record?
 
-  scope :latest, -> { order(time_start: :desc)}
-
-  scope :status_published, -> { where(status: Item.statuses[:published])}
+  scope :latest, -> { order(time_start: :desc) }
   scope :current_displayed, -> { where('time_start < ? AND time_end > ?', Time.now, Time.now) }
-
-  scope :show_active, -> { status_published.latest.current_displayed }
+  scope :show_active, -> { published.latest.current_displayed }
 
   friendly_id :title, use: :slugged
 
