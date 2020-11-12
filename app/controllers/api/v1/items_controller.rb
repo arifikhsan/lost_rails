@@ -3,7 +3,9 @@ class Api::V1::ItemsController < ApplicationController
   before_action :set_item, except: %i[index]
 
   def index
-    @items = Item.show_active.page(params[:page]).includes(:category, user: :user_detail)
+    @items = Item.published.latest
+    @items = @items.where(condition: params[:condition]) if params[:condition]
+    @items = @items.page(params[:page]).includes(:category, user: :user_detail)
   end
 
   def show
