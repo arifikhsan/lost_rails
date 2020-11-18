@@ -49,7 +49,7 @@ if Item.count.zero?
   end
 
   Item.all.each do |item|
-    [0, 1, 2].sample.times do
+    [1, 2].sample.times do
       category = Category.where.not(id: item.categories.pluck(:id)).sample
       item.category_items.create(category_id: category.id)
     end
