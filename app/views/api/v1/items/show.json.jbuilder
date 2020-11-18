@@ -7,7 +7,7 @@ json.data do
   json.time_start @item.time_start
   json.time_end @item.time_end
   json.status @item.status
-  json.condition @item.condition
+  json.condition literal_condition(@item.condition)
   # json.cover_image_url polymorphic_url(@item.images.cover.image.variant(resize: "300x300"))
   # json.cover_image do
   #   json.url do
@@ -44,7 +44,7 @@ json.data do
     json.time_start item.time_start
     json.time_end item.time_end
     json.status item.status
-    json.condition @item.condition
+    json.condition literal_condition(@item.condition)
     # json.cover_image_url polymorphic_url(item.images.cover.image.variant(resize: "300x300"))
     json.user do
       json.name item.user.name
