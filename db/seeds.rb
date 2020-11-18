@@ -27,7 +27,7 @@ if Category.count.zero?
     { name: 'Tas' },
     { name: 'Uang' },
     { name: 'Perhiasan' },
-    { name: 'Lainnya'}
+    { name: 'Lainnya' }
   ]
   Category.create(main_categories)
 end
@@ -44,13 +44,16 @@ if Item.count.zero?
       radius: [0, 10, 20, 30].sample,
       time_start: Time.now,
       time_end: Time.now + 1.year,
-      reward: [0, 100000, 500000, 800000].sample,
       status: Item.statuses[:published]
     )
   end
 
   Item.all.each do |item|
-    item.category_items.create(category_id: Category.all.sample.id)
+    [0, 1, 2].sample.times do
+      category = Category.where.not(id: item.categories.pluck(:id)).sample
+      item.category_items.create(category_id: category.id)
+    end
+    item.create_reward(value: [100_000, 500_000].sample) if [false, false, true].sample
   end
 end
 

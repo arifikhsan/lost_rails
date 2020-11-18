@@ -2,11 +2,12 @@ class Item < ApplicationRecord
   extend FriendlyId
 
   belongs_to :user
+  has_one :reward, dependent: :destroy
   has_many :category_items, dependent: :destroy
   has_many :categories, through: :category_items
 
-  enum condition: [:lost, :found]
-  enum status: [:draft, :review, :published, :moderate]
+  enum condition: %i[lost found]
+  enum status: %i[draft review published moderate]
 
   after_initialize :set_default_status, if: :new_record?
 

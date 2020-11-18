@@ -6,7 +6,6 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.text :detail
       t.integer :condition
       t.integer :status
-      t.bigint :reward
       t.datetime :time_start
       t.datetime :time_end
       t.float :latitude
