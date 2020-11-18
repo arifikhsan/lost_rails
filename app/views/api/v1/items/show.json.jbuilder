@@ -31,8 +31,9 @@ json.data do
     json.phone_number @item.user.user_detail.phone_number
     json.whatsapp_phone_number @item.user.user_detail.whatsapp_phone_number
   end
-  json.category do
-    json.name @item.category.name
+  json.categories @item.categories do |category|
+    json.id category.id
+    json.name category.name
   end
   json.related @item.related do |item|
     json.id item.id
