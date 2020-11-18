@@ -5,7 +5,7 @@ class Api::V1::ItemsController < Api::ApiController
   def index
     @items = Item.published.latest
     @items = @items.where(condition: params[:condition]) if params[:condition]
-    @items = @items.page(params[:page]).includes(:categories, user: :user_detail)
+    @items = @items.page(params[:page]).includes(:categories, :reward, user: :user_detail)
   end
 
   def show; end
