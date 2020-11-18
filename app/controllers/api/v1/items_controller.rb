@@ -15,7 +15,7 @@ class Api::V1::ItemsController < Api::ApiController
     @item.user = current_user
 
     if @item.save
-      render json: {message: 'created', data: @item}, status: :created
+      render json: { message: 'created', data: @item }, status: :created
     else
       render_error
     end
@@ -41,10 +41,6 @@ class Api::V1::ItemsController < Api::ApiController
 
   def set_item
     @item = Item.friendly.find(params[:id])
-  end
-
-  def render_error
-    render json: {errors: @item.errors.full_messages}, status: :unprocessable_entity
   end
 
   def item_params
