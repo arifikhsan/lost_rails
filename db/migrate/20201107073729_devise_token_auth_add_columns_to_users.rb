@@ -29,9 +29,9 @@ class DeviseTokenAuthAddColumnsToUsers < ActiveRecord::Migration[6.0]
       # t.datetime :locked_at
 
       ## User Info
-      # t.string :name
-      # t.string :nickname
-      # t.string :image
+      add_column :users, :name, :string
+      add_column :users, :nickname, :string
+      add_column :users, :image, :string
       # t.string :email
 
       ## Tokens

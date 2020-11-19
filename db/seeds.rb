@@ -10,12 +10,12 @@ p 'seed start'
 
 if User.count.zero?
   admin = User.create(email: 'admin@example.com', password: '123456')
-  admin.build_user_detail(name: 'admin')
+  admin.build_user_detail(phone_number: '0812345678')
   admin.save
   admin.admin!
 
   user = User.create(email: 'user@example.com', password: '123456')
-  user.build_user_detail(name: 'user')
+  user.build_user_detail(phone_number: '0812345678')
   user.save
 end
 

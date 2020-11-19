@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 2020_11_18_094438) do
 
   create_table "user_details", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "name"
     t.string "username"
     t.string "address_formatted_address"
     t.string "address_street_number"
@@ -125,6 +124,9 @@ ActiveRecord::Schema.define(version: 2020_11_18_094438) do
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.boolean "allow_password_change", default: false
+    t.string "name"
+    t.string "nickname"
+    t.string "image"
     t.json "tokens"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
