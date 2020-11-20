@@ -20,10 +20,10 @@ class Api::V1::AuthController < DeviseTokenAuth::OmniauthCallbacksController
   private
 
   def set_resource
-    user = User.find_or_create_by(email: profile_params[:email], uid: profile_params[:id]) do |user|
-      user.provider = account_params.provider
-      user.name = user_params.name
-      user.image = user_params.image
+    user = User.where(email: profile_params[:email], uid: profile_params[:id]).first_or_create do |user|
+      user.provider = account_params[:provider]
+      user.name = user_params[:name]
+      user.image = user_params[:image]
       user.save
     end
     @resource = user
