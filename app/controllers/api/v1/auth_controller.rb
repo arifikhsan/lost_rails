@@ -30,14 +30,14 @@ class Api::V1::AuthController < DeviseTokenAuth::OmniauthCallbacksController
   end
 
   def user_params
-    params.require(:user)
+    params.require(:user).permit(:name, :image)
   end
 
   def account_params
-    params.require(:account)
+    params.require(:account).permit(:provider)
   end
 
   def profile_params
-    params.require(:profile)
+    params.require(:profile).permit(:id, :email)
   end
 end
