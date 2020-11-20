@@ -32,12 +32,12 @@ class Api::V1::Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCal
     end
 
     # binding.pry
-    redirect_to DeviseTokenAuth::Url.generate('https://bantutemu.now.sh', {resource: @resource, auth_params: @auth_params})
+    # redirect_to DeviseTokenAuth::Url.generate('https://bantutemu.now.sh', {resource: @resource, auth_params: @auth_params})
 
-    # render json: {
-    #   message: 'success, check header',
-    #   resource: @resource,
-    #   auth: @auth_params
-    # }
+    render json: {
+      message: 'success, check header',
+      resource: @resource,
+      auth: @auth_params
+    }
   end
 end

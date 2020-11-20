@@ -34,4 +34,4 @@ heroku logs --tail --app lost-rails
 ### secret key
 
 EDITOR=vim rails credentials:edit
-rails:credentials:show
+rails credentials:show

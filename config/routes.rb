@@ -14,13 +14,10 @@ Rails.application.routes.draw do
     post 'register', to: 'auth#register'
     get 'wakeup', to: 'misc#wakeup'
     scope :v1 do
-      # mount_devise_token_auth_for 'User', at: 'auth'
-      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-        omniauth_callbacks: 'api/v1/users/omniauth_callbacks',
-        sessions: 'api/v1/users/sessions'
-      } # , via: [:get, :post]
+      mount_devise_token_auth_for 'User', at: 'auth'
     end
     namespace :v1 do
+      post 'signin_from_google', to: 'auth#signin_from_google'
       get 'me', to: 'users#me'
       resources :items
       resources :user_details
