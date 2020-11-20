@@ -24,6 +24,7 @@ class Api::V1::AuthController < DeviseTokenAuth::OmniauthCallbacksController
       user.provider = account_params[:provider]
       user.name = user_params[:name]
       user.image = user_params[:image]
+      user.role = :user
       user.save
     end
     @resource = user
