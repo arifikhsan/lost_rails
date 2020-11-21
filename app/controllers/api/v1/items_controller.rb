@@ -8,7 +8,8 @@ class Api::V1::ItemsController < Api::ApiController
     @items = @items.page(params[:page]).includes(:categories, :reward, user: :user_detail)
   end
 
-  def show; end
+  def show
+  end
 
   def create
     @item = Item.new(item_params)
