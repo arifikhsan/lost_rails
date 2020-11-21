@@ -67,7 +67,7 @@ jobs:
           RAILS_ENV: test
           POSTGRES_PASSWORD: postgres
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: rake
+        run: bundle exec rspec
 
       - name: Deploy
         uses: akhileshns/heroku-deploy@v3.4.6
