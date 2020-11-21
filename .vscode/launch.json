@@ -5,12 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Rake test",
+      "name": "Run RSpec",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/bundle",
+      "args": ["exec", "rspec"],
+    },
+    {
+      "name": "Setup test database",
       "type": "Ruby",
       "request": "launch",
       "program": "${workspaceRoot}/bin/rake",
-      "args": ["db:drop", "db:create", "db:migrate", "test"],
-      "env": {"RAILS_ENV": "test"}
+      "args": ["db:drop", "db:create", "db:migrate", "db:seed"],
+      "env": { "RAILS_ENV": "test" }
     },
     {
       "name": "Drop, Recreate, Seed",
