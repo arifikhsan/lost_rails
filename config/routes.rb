@@ -1,6 +1,12 @@
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'categories/index'
+      get 'categories/show'
+    end
+  end
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
@@ -21,6 +27,7 @@ Rails.application.routes.draw do
       get 'me', to: 'users#me'
       resources :items
       resources :user_details
+      resources :categories
     end
   end
 end
