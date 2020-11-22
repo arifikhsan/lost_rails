@@ -1,6 +1,6 @@
 class Api::V1::ItemsController < Api::ApiController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_item, only: %i[show create update destroy]
+  before_action :set_item, only: %i[show update destroy]
   before_action :set_items, only: %i[index mine]
 
   def index; end

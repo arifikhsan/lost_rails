@@ -23,9 +23,10 @@ json.data do
     json.id category.id
     json.name category.name
   end
-
-  json.reward do
-    json.id @item.reward.id
-    json.value @item.reward.value
+  if @item.reward
+    json.reward do
+      json.id @item.reward.id
+      json.value @item.reward.value
+    end
   end
 end
