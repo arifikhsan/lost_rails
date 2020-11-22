@@ -5,6 +5,5 @@ class Api::V1::CategoriesController < Api::ApiController
     @categories = Category.all
   end
 
-  def show
-  end
+  def show; end
 end

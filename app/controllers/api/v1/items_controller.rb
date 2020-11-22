@@ -1,14 +1,19 @@
 class Api::V1::ItemsController < Api::ApiController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_item, except: %i[index create]
+  before_action :set_item, only: %i[show create update destroy]
+  before_action :set_items, only: %i[index mine]
 
-  def index
-    @items = Item.published.latest
-    @items = @items.where(condition: params[:condition]) if params[:condition]
-    @items = @items.page(params[:page]).includes(:categories, :reward, user: :user_detail)
+  def index; end
+
+  def mine
+    @items = @items.where(user_id: current_user.id)
+    render :index
   end
 
-  def show
+  def show; end
+
+  def new
+    @categories = Category.all
   end
 
   def create
@@ -31,6 +36,15 @@ class Api::V1::ItemsController < Api::ApiController
     @item.destroy
   end
 
+  protected
+
+  def set_items
+    @items = Item.published.latest
+    @items = @items.where(condition: params[:condition]) if params[:condition]
+    @items = @items.page(params[:page]).per(params[:per])
+    @items = @items.includes(:categories, :reward, user: :user_detail)
+  end
+
   private
 
   def set_item
@@ -39,21 +53,14 @@ class Api::V1::ItemsController < Api::ApiController
 
   def item_params
     params.require(:item).permit(
-      :title,
-      :detail,
-      :condition,
-      :status,
-      :time_start,
-      :time_end,
-      :latitude,
-      :longitude,
-      :radius,
+      :title, :detail, :condition, :status, :time_start,
+      :time_end, :latitude, :longitude, :radius,
       category_items_attributes: %i[id category_id],
       reward_attributes: %i[id value]
     )
   end
 
   def render_error
-    render json: {errors: @item.errors.full_messages}, status: :unprocessable_entity
+    render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
   end
 end
