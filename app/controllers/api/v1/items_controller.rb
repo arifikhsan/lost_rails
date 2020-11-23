@@ -54,6 +54,8 @@ class Api::V1::ItemsController < Api::ApiController
 
   def set_item
     @item = Item.friendly.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: {message: 'Not found'}, status: :not_found
   end
 
   def item_params
