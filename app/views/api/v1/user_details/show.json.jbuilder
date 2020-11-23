@@ -3,7 +3,6 @@ json.user do
   json.email @user.email
 end
 json.user_detail do
-  json.id @user.id
   json.username @user_detail.username
   # json.address_formatted_address @user_detail.address_formatted_address
   # json.address_street_number @user_detail.address_street_number
