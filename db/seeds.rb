@@ -33,7 +33,7 @@ if Category.count.zero?
 end
 
 if Item.count.zero?
-  40.times do
+  5.times do
     Item.create(
       user: User.all.sample,
       title: Faker::Lorem.sentence,
