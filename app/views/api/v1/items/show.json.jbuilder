@@ -7,7 +7,7 @@ json.data do
   json.time_start @item.time_start
   json.time_end @item.time_end
   json.status @item.status
-  json.condition literal_condition(@item.condition)
+  json.condition @item.condition
   # json.cover_image_url polymorphic_url(@item.images.cover.image.variant(resize: "300x300"))
   # json.cover_image do
   #   json.url do
@@ -26,10 +26,13 @@ json.data do
   #   end
   # end
   json.user do
+    json.uid @item.user.uid
     json.name @item.user.name
     json.email @item.user.email
-    json.phone_number @item.user.user_detail.phone_number
-    json.whatsapp_phone_number @item.user.user_detail.whatsapp_phone_number
+    if @item.user.user_detail
+      json.phone_number @item.user.user_detail.phone_number
+      json.whatsapp_phone_number @item.user.user_detail.whatsapp_phone_number
+    end
   end
   json.categories @item.categories do |category|
     json.id category.id
@@ -44,7 +47,7 @@ json.data do
     json.time_start item.time_start
     json.time_end item.time_end
     json.status item.status
-    json.condition literal_condition(@item.condition)
+    json.condition @item.condition
     # json.cover_image_url polymorphic_url(item.images.cover.image.variant(resize: "300x300"))
     json.user do
       json.name item.user.name

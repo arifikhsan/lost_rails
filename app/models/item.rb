@@ -29,6 +29,10 @@ class Item < ApplicationRecord
   end
 
   def related
-    categories.first.items.where.not(id: id).latest.published.limit(6)
+    if categories.first
+      categories.first.items.where.not(id: id).latest.published.limit(6)
+    else
+      Item.latest.published.limit(6)
+    end
   end
 end

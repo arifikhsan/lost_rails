@@ -3,7 +3,7 @@ json.data @items do |item|
   json.title item.title
   json.slug item.slug
   json.detail item.detail
-  json.condition literal_condition(item.condition)
+  json.condition item.condition
   json.reward item.reward
   json.time_start item.time_start
   json.time_end item.time_end

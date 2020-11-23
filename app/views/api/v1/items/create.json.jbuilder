@@ -6,7 +6,7 @@ json.data do
   json.time_start @item.time_start
   json.time_end @item.time_end
   json.status @item.status
-  json.condition literal_condition(@item.condition)
+  json.condition @item.condition
   json.user do
     json.name @item.user.name
     json.email @item.user.email

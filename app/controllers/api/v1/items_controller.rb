@@ -1,6 +1,6 @@
 class Api::V1::ItemsController < Api::ApiController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_item, only: %i[show update destroy]
+  before_action :set_item, only: %i[show edit update destroy]
   before_action :set_items, only: %i[index mine]
 
   def index; end
@@ -19,7 +19,8 @@ class Api::V1::ItemsController < Api::ApiController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
-    @item.category_items.new unless item_params[:category_items_attributes]
+
+    @item.category_items.new if item_params[:category_items_attributes].blank?
 
     render_error unless @item.save
     render status: :created
@@ -29,6 +30,10 @@ class Api::V1::ItemsController < Api::ApiController
 
   def update
     @item.update(item_params)
+
+    @item.category_items.new if @item.category_items.blank?
+    @item.save
+
     render_error unless @item.valid?
   end
 
@@ -39,7 +44,7 @@ class Api::V1::ItemsController < Api::ApiController
   protected
 
   def set_items
-    @items = Item.published.latest
+    @items = Item.published.order(created_at: :desc)
     @items = @items.where(condition: params[:condition]) if params[:condition]
     @items = @items.page(params[:page]).per(params[:per])
     @items = @items.includes(:categories, :reward, user: :user_detail)
@@ -55,8 +60,8 @@ class Api::V1::ItemsController < Api::ApiController
     params.require(:item).permit(
       :title, :detail, :condition, :status, :time_start,
       :time_end, :latitude, :longitude, :radius,
-      category_items_attributes: %i[id category_id],
-      reward_attributes: %i[id value]
+      category_items_attributes: %i[id category_id _destroy],
+      reward_attributes: %i[id value _destroy]
     )
   end
 
