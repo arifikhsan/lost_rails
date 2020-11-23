@@ -25,7 +25,7 @@ class Item < ApplicationRecord
   end
 
   def set_default_status
-    self.status ||= :draft
+    self.status ||= :published
   end
 
   def related
