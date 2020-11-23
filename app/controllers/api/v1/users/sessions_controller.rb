@@ -18,9 +18,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::OmniauthCallbacksCon
   end
 
   def destroy
-
-    binding.pry
-
+    # sign out remove all token
+    # binding.pry
   end
 
   private

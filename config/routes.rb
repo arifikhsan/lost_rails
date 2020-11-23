@@ -27,7 +27,10 @@ Rails.application.routes.draw do
       get 'me', to: 'users#me'
       get 'items/mine', to: 'items#mine'
       resources :items
-      resources :user_details
+      get 'user_details', to: 'user_details#show'
+      put 'user_details', to: 'user_details#update'
+      put 'users', to: 'users#update'
+      # resources :user_details
       resources :categories
     end
   end

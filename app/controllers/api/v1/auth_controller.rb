@@ -2,6 +2,7 @@ class Api::V1::AuthController < DeviseTokenAuth::OmniauthCallbacksController
   before_action :set_resource
 
   def signin_from_google
+    # @resource.update(tokens: nil)
     @token = @resource.create_token
     @resource.save
     sign_in(@resource)
@@ -25,6 +26,10 @@ class Api::V1::AuthController < DeviseTokenAuth::OmniauthCallbacksController
       user.name = user_params[:name]
       user.image = user_params[:image]
       user.role = :user
+      user.save
+    end
+    if user.user_detail.blank?
+      user.build_user_detail(username: user.name.split.join.downcase)
       user.save
     end
     @resource = user

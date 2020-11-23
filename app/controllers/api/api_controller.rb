@@ -5,4 +5,8 @@ class Api::ApiController < ApplicationController
   def not_found
     render json: {aa: 123}, status: :not_found
   end
+
+  def render_error(object)
+    render json: { errors: object.errors.full_messages }, status: :unprocessable_entity
+  end
 end
