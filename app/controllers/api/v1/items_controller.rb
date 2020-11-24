@@ -44,22 +44,21 @@ class Api::V1::ItemsController < Api::ApiController
   protected
 
   def set_items
-    # binding.pry
     @items = Item.published.order(created_at: :desc)
     @items = @items.where(condition: with_condition) if with_condition
-    @items = @items.joins(:reward) if with_reward
+    @items = @items.joins(:reward).where.not(rewards: { id: nil }) if with_reward
     @items = @items.page(params[:page]).per(params[:per])
     @items = @items.includes(:categories, :reward, user: :user_detail)
   end
 
   def with_reward
-    return unless params[:reward].blank?
+    return if params[:reward].blank?
 
     params[:reward].to_s.downcase == 'yes' 
   end
 
   def with_condition
-    return unless params[:condition].blank? 
+    return if params[:condition].blank? 
     return unless ['lost', 'found'].include?(params[:condition].to_s.downcase)
 
     params[:condition].to_s.downcase
