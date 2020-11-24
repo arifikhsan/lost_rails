@@ -4,29 +4,24 @@ json.data @items do |item|
   json.slug item.slug
   json.detail item.detail
   json.condition item.condition
-  json.reward item.reward
   json.time_start item.time_start
   json.time_end item.time_end
   json.latitude item.latitude
   json.longitude item.longitude
   json.radius item.radius
-
-  # json.cover_image_url polymorphic_url(item.images.cover.image.variant(resize: "300x300"))
-  # json.images item.images do |item_image|
-  #   json.filename item_image.image.blob.filename
-  #   json.cover item_image.cover
-  #   json.url do
-  #     json.small polymorphic_url(item_image.image.variant(resize: "300x300"))
-  #     json.original rails_blob_url(item_image.image)
-  #   end
-  # end
   json.user do
     json.name item.user.name
-    # json.email item.user.email
   end
   json.categories item.categories do |category|
     json.id category.id
     json.name category.name
+  end
+  if item.reward
+    json.reward do
+      json.id item.reward.id
+      json.value item.reward.value
+      json.category item.reward.category
+    end
   end
 end
 json.pagination do
