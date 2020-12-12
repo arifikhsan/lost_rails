@@ -67,3 +67,5 @@ gem "devise_token_auth", "~> 1.1"
 gem "kaminari", "~> 1.2"
 gem "friendly_id", "~> 5.4"
 gem "omniauth-google-oauth2", "~> 0.8.0"
+
+gem "pg_search", "~> 2.3"

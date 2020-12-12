@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   extend FriendlyId
+  include PgSearch::Model
 
   belongs_to :user
   has_one :reward, dependent: :destroy
@@ -19,6 +20,8 @@ class Item < ApplicationRecord
   scope :show_active, -> { published.latest.current_displayed }
 
   friendly_id :title, use: :slugged
+  multisearchable against: %i[title detail]
+  pg_search_scope :search_by_query, against: %i[title detail]
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
