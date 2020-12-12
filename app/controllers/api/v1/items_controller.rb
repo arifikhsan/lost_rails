@@ -1,5 +1,5 @@
 class Api::V1::ItemsController < Api::ApiController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show search]
   before_action :set_item, only: %i[show edit update destroy]
   before_action :set_items, only: %i[index mine]
 
@@ -41,6 +41,14 @@ class Api::V1::ItemsController < Api::ApiController
     @item.destroy
   end
 
+  def search
+    @items = Item.search_by_query(params[:query])
+    @items = @items.includes(:categories, :reward, user: :user_detail)
+    @items = @items.page(params[:page]).per(params[:per])
+
+    render :index
+  end
+
   protected
 
   def set_items
@@ -54,12 +62,12 @@ class Api::V1::ItemsController < Api::ApiController
   def with_reward
     return if params[:reward].blank?
 
-    params[:reward].to_s.downcase == 'yes' 
+    params[:reward].to_s.downcase == 'yes'
   end
 
   def with_condition
-    return if params[:condition].blank? 
-    return unless ['lost', 'found'].include?(params[:condition].to_s.downcase)
+    return if params[:condition].blank?
+    return unless %w[lost found].include?(params[:condition].to_s.downcase)
 
     params[:condition].to_s.downcase
   end
@@ -69,7 +77,7 @@ class Api::V1::ItemsController < Api::ApiController
   def set_item
     @item = Item.friendly.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: {message: 'Not found'}, status: :not_found
+    render json: { message: 'Not found' }, status: :not_found
   end
 
   def item_params
