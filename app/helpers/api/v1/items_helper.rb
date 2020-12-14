@@ -4,6 +4,7 @@ module Api::V1::ItemsHelper
   end
 
   def anchor_from(model)
+    return 0 if model.size.zero?
     return 1 if model.first_page?
 
     ((model.current_page - 1) * model.limit_value) + 1

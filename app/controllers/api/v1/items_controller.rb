@@ -1,7 +1,7 @@
 class Api::V1::ItemsController < Api::ApiController
   before_action :authenticate_user!, except: %i[index show search]
   before_action :set_item, only: %i[show edit update destroy]
-  before_action :set_items, only: %i[index mine]
+  before_action :set_items, only: %i[index mine search]
 
   def index; end
 
@@ -42,25 +42,41 @@ class Api::V1::ItemsController < Api::ApiController
   end
 
   def search
-    @items = Item.search_by_query(params[:query])
-    @items = @items.includes(:categories, :reward, user: :user_detail)
-    @items = @items.page(params[:page]).per(params[:per])
-
+    @items = @items.search_by_query(with_search)
     render :index
   end
 
   protected
 
   def set_items
-    @items = Item.published.order(created_at: :desc)
+    @items = Item.published
+    @items = @items.search_by_query(with_search) if with_search
     @items = @items.where(condition: with_condition) if with_condition
     @items = @items.joins(:reward).where.not(rewards: { id: nil }) if with_reward
+    @items = @items.order(created_at: :desc)
     @items = @items.page(params[:page]).per(params[:per])
     @items = @items.includes(:categories, :reward, user: :user_detail)
+  end
 
+  def set_item
+    @item = Item.friendly.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { message: 'Not found' }, status: :not_found
+  end
 
-    # binding.pry
+  private
 
+  def item_params
+    params.require(:item).permit(
+      :title, :detail, :condition, :status, :time_start,
+      :time_end, :latitude, :longitude, :radius,
+      category_items_attributes: %i[id category_id _destroy],
+      reward_attributes: %i[id value _destroy]
+    )
+  end
+
+  def render_error
+    render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
   end
 
   def with_reward
@@ -76,24 +92,9 @@ class Api::V1::ItemsController < Api::ApiController
     params[:condition].to_s.downcase
   end
 
-  private
+  def with_search
+    return if params[:query].blank?
 
-  def set_item
-    @item = Item.friendly.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { message: 'Not found' }, status: :not_found
-  end
-
-  def item_params
-    params.require(:item).permit(
-      :title, :detail, :condition, :status, :time_start,
-      :time_end, :latitude, :longitude, :radius,
-      category_items_attributes: %i[id category_id _destroy],
-      reward_attributes: %i[id value _destroy]
-    )
-  end
-
-  def render_error
-    render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
+    params[:query].to_s
   end
 end
