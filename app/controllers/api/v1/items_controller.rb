@@ -57,6 +57,10 @@ class Api::V1::ItemsController < Api::ApiController
     @items = @items.joins(:reward).where.not(rewards: { id: nil }) if with_reward
     @items = @items.page(params[:page]).per(params[:per])
     @items = @items.includes(:categories, :reward, user: :user_detail)
+
+
+    # binding.pry
+
   end
 
   def with_reward

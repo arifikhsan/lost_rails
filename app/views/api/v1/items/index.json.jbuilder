@@ -25,8 +25,11 @@ json.data @items do |item|
   end
 end
 json.pagination do
-  json.total_pages @items.total_pages
   json.current_page @items.current_page
+  json.from anchor_from(@items)
+  json.to anchor_to(@items)
+  json.size @items.size
+  json.total_pages @items.total_pages
   json.next_page @items.next_page
   json.prev_page @items.prev_page
   json.is_first_page @items.first_page?
