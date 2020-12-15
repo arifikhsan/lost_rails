@@ -26,13 +26,13 @@ Rails.application.routes.draw do
       post 'signin_from_google', to: 'auth#signin_from_google'
       get 'me', to: 'users#me'
       get 'items/mine', to: 'items#mine'
-      get 'items/search', to: 'items#search'
       resources :items
       get 'user_details', to: 'user_details#show'
       put 'user_details', to: 'user_details#update'
       put 'users', to: 'users#update'
       # resources :user_details
       resources :categories
+      resources :groups
     end
   end
 end
