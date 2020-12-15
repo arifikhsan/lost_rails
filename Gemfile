@@ -30,9 +30,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem "rspec-rails", "~> 4.0"
-  gem "pry", "~> 0.13.1"
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 4.0'
+  gem 'pry', '~> 0.13.1'
 end
 
 group :development do
@@ -49,23 +49,22 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "devise", "~> 4.7"
-
-gem "rails_admin", "~> 2.0"
-gem "rack-cors", "~> 1.1"
-gem "jwt", "~> 2.2"
-gem "graphql", "~> 1.11"
+gem 'devise', '~> 4.7'
+gem 'rails_admin', '~> 2.0'
+gem 'rack-cors', '~> 1.1'
+gem 'jwt', '~> 2.2'
+gem 'graphql', '~> 1.11'
 gem 'graphiql-rails', group: :development
-gem "graphql-rails_logger", "~> 1.2"
-gem "jt-rails-address", "~> 1.3"
-gem "geocoder", "~> 1.6"
-gem "rails_admin_rollincode", "~> 1.3"
-gem "faker", "~> 2.14"
-gem "devise_token_auth", "~> 1.1"
-gem "kaminari", "~> 1.2"
-gem "friendly_id", "~> 5.4"
-gem "omniauth-google-oauth2", "~> 0.8.0"
-
-gem "pg_search", "~> 2.3"
+gem 'graphql-rails_logger', '~> 1.2'
+gem 'jt-rails-address', '~> 1.3'
+gem 'geocoder', '~> 1.6'
+gem 'rails_admin_rollincode', '~> 1.3'
+gem 'faker', '~> 2.14'
+gem 'devise_token_auth', '~> 1.1'
+gem 'kaminari', '~> 1.2'
+gem 'friendly_id', '~> 5.4'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'pg_search', '~> 2.3'
+gem 'aws-sdk-s3', '~> 1.86'
