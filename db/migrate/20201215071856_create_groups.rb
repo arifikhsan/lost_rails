@@ -5,6 +5,7 @@ class CreateGroups < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :username
       t.string :location
+      t.boolean :private, default: false
 
       t.timestamps
     end
