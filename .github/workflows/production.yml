@@ -1,4 +1,4 @@
-name: Rails
+name: Production
 on: push
 
 jobs:

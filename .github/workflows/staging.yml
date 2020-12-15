@@ -1,4 +1,4 @@
-name: Rails
+name: Staging
 on:
   push:
     branches:
