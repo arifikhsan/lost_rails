@@ -57,4 +57,30 @@ if Item.count.zero?
   end
 end
 
+if Group.count.zero?
+  n = Group.create(
+    user_id: User.admin.id,
+    name: 'Nasional',
+    username: 'nasional',
+    location: 'Indonesia'
+  )
+  3.times do
+    n.group_members.create(user_id: User.all.sample.id)
+  end
+
+  3.times do
+    name = Faker::Name.first_name
+    g = Group.create(
+      user_id: User.all.sample.id,
+      name: name,
+      username: name.downcase,
+      location: Faker::Nation.capital_city
+    )
+
+    5.times do
+      g.group_members.create(user_id: User.all.sample.id)
+    end
+  end
+end
+
 p 'seed done'
