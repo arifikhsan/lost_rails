@@ -22,7 +22,7 @@ class Api::V1::ItemsController < Api::ApiController
 
     @item.category_items.new if item_params[:category_items_attributes].blank?
 
-    render_error unless @item.save
+    render_error_from(@item) unless @item.save
     render status: :created
   end
 
@@ -34,7 +34,7 @@ class Api::V1::ItemsController < Api::ApiController
     @item.category_items.new if @item.category_items.blank?
     @item.save
 
-    render_error unless @item.valid?
+    render_error_from(@item) unless @item.valid?
   end
 
   def destroy
@@ -61,7 +61,7 @@ class Api::V1::ItemsController < Api::ApiController
   def set_item
     @item = Item.friendly.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { message: 'Not found' }, status: :not_found
+    render_not_found
   end
 
   private
@@ -73,10 +73,6 @@ class Api::V1::ItemsController < Api::ApiController
       category_items_attributes: %i[id category_id _destroy],
       reward_attributes: %i[id value _destroy]
     )
-  end
-
-  def render_error
-    render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
   end
 
   def with_reward

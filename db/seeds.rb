@@ -62,7 +62,8 @@ if Group.count.zero?
     user_id: User.admin.id,
     name: 'Nasional',
     username: 'nasional',
-    location: 'Indonesia'
+    location: 'Indonesia',
+    verified: true
   )
   3.times do
     n.group_members.create(user_id: User.all.sample.id)
@@ -74,7 +75,8 @@ if Group.count.zero?
       user_id: User.all.sample.id,
       name: name,
       username: name.downcase,
-      location: Faker::Nation.capital_city
+      location: Faker::Nation.capital_city,
+      private: [true, false].sample
     )
 
     5.times do
