@@ -11,5 +11,7 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe Api::V1::GroupsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'todo' do
+    it { expect('do').to eq('do') }
+  end
 end

@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'todo' do
+    it { expect('do').to eq('do') }
+  end
 end
