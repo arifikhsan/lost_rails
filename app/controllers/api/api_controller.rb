@@ -1,6 +1,6 @@
 class Api::ApiController < ApplicationController
-  skip_before_action :verify_authenticity_token
   include DeviseTokenAuth::Concerns::SetUserByToken
+  skip_before_action :verify_authenticity_token
 
   def render_not_found
     render json: { message: 'Not found' }, status: :not_found
