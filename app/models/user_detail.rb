@@ -4,4 +4,6 @@ class UserDetail < ApplicationRecord
 
   extend FriendlyId
   friendly_id :username, use: :slugged
+
+  validates_presence_of :user_id
 end
