@@ -43,10 +43,13 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+
+  gem 'factory_bot_rails', '~> 6.1'
   gem 'json_spec', '~> 1.1'
   gem 'rails-controller-testing', '~> 1.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 4.4'
+
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
@@ -71,5 +74,3 @@ gem 'friendly_id', '~> 5.4'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'pg_search', '~> 2.3'
 gem 'aws-sdk-s3', '~> 1.86'
-
-gem "factory_bot_rails", "~> 6.1"
