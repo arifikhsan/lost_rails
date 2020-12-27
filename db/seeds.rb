@@ -58,26 +58,30 @@ if Item.count.zero?
 end
 
 if Group.count.zero?
-  n = Group.create(
+  n = Group.new(
     user_id: User.admin.id,
     name: 'Nasional',
     username: 'nasional',
     location: 'Indonesia',
     verified: true
   )
+  n.avatar.attach(io: Rails.root.join('app/assets/images/logo.png').open, filename: 'logo.png')
+  n.save
   3.times do
     n.group_members.create(user_id: User.all.sample.id)
   end
 
   3.times do
     name = Faker::Name.first_name
-    g = Group.create(
+    g = Group.new(
       user_id: User.all.sample.id,
       name: name,
       username: name.downcase,
       location: Faker::Nation.capital_city,
       private: [true, false].sample
     )
+    g.avatar.attach(io: Rails.root.join('app/assets/images/logo.png').open, filename: 'logo.png')
+    g.save
 
     5.times do
       g.group_members.create(user_id: User.all.sample.id)

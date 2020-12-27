@@ -4,6 +4,15 @@ json.data @groups do |group|
   json.username group.username
   json.private group.private
   json.verified group.verified
+  if group.avatar.present?
+    json.avatar do
+      json.thumbnail polymorphic_url(group.avatar.variant(resize: '150x150'))
+      json.small polymorphic_url(group.avatar.variant(resize: '300x300'))
+      json.original rails_blob_url(group.avatar)
+    end
+  else
+    json.avatar nil
+  end
 end
 json.pagination do
   json.current_page @groups.current_page
@@ -19,4 +28,3 @@ json.pagination do
   json.limit @groups.limit_value
   json.total_count @groups.total_count
 end
-
