@@ -71,6 +71,8 @@ gem 'faker', '~> 2.14'
 gem 'devise_token_auth', '~> 1.1'
 gem 'kaminari', '~> 1.2'
 gem 'friendly_id', '~> 5.4'
-gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem "omniauth-google-oauth2", "~> 0.8.1"
 gem 'pg_search', '~> 2.3'
 gem 'aws-sdk-s3', '~> 1.86'
+
+gem "omniauth", "~> 2.0"
