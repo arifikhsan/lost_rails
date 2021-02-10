@@ -75,4 +75,4 @@ gem "omniauth-google-oauth2", "~> 0.8.1"
 gem 'pg_search', '~> 2.3'
 gem 'aws-sdk-s3', '~> 1.86'
 
-gem "omniauth", "~> 2.0"
+gem "omniauth", "~> 1.9.1"
