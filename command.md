@@ -36,8 +36,11 @@ heroku logs --tail --app lost-rails
 EDITOR=vim rails credentials:edit
 rails credentials:show
 
-### Backup
+### Create Backup
+heroku pg:backups:capture --app lost-rails
+
+### Download Backup
 heroku pg:backups:download --app lost-rails
 
 ### Restore
-heroku pg:backups:restore --app lost-rails
+heroku pg:backups:restore --app lost-rails --confirm lost-rails
