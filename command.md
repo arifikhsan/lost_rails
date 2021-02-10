@@ -8,7 +8,7 @@ CRUD iklan
 
 ### heroku clean
 
-heroku restart && heroku pg:reset DATABASE --confirm lost-rails && heroku run rake db:migrate
+heroku restart --app=lost-rails && heroku pg:reset DATABASE --confirm lost-rails --app=lost-rails && heroku run rake db:migrate --app=lost-rails
 
 ### seed on heroku
 
@@ -35,3 +35,9 @@ heroku logs --tail --app lost-rails
 
 EDITOR=vim rails credentials:edit
 rails credentials:show
+
+### Backup
+heroku pg:backups:download --app lost-rails
+
+### Restore
+heroku pg:backups:restore --app lost-rails
