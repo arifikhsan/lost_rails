@@ -75,3 +75,7 @@ gem "omniauth-google-oauth2", "~> 0.8.1"
 gem 'pg_search', '~> 2.3'
 gem 'aws-sdk-s3', '~> 1.86'
 gem "omniauth", "~> 1.9.1"
+
+gem "rails_admin_import", "~> 2.2"
+
+gem "charlock_holmes", "~> 0.7.7"
