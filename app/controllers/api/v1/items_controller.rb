@@ -3,7 +3,7 @@ class Api::V1::ItemsController < Api::ApiController
   before_action :set_item, only: %i[show edit update destroy]
   before_action :set_items, only: %i[index mine search]
 
-  def index; end
+  def index;end
 
   def mine
     @items = @items.where(user_id: current_user.id)
